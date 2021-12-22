@@ -9,6 +9,7 @@ function fn(params) {
   console.log(params, this, window, arguments);
   debugger;
 }
+// fn(1);
 
 // #2 this 的指向為何
 // var obj = {
@@ -21,10 +22,10 @@ function fn(params) {
 
 // #3 注意：this 的指向相當複雜，大部分情境只需要了解其中一種即可(95%)
 // 傳統函式中的 this 只與調用方式有關
-// var someone = '全域';
-// function callSomeone() {
-//   console.log(this.someone);
-// }
+var someone = '全域';
+function callSomeone() {
+  console.log(this.someone);
+}
 // callSomeone();
 
 // #4 各種運用變化
@@ -60,15 +61,16 @@ function fn(params) {
 // }
 // obj3.fn();
 
-// var obj4 = {
-//   someone: '物件 4',
-//   fn() {
-//     setTimeout(function () {
-//       console.log(this.someone);
-//     });
-//   }
-// }
-// obj4.fn();
+var obj4 = {
+  someone: '物件 4',
+  fn() {
+    // 非同步的this指向為全域
+    setTimeout(function () {
+      console.log(this.someone);
+    });
+  }
+}
+obj4.fn();
 
 </script>
 <!-- 🙇🙇練習結束🙇🙇 -->
