@@ -33,34 +33,62 @@ const promiseSetTimeout = (status) => {
       } else {
         reject('promiseSetTimeout 失敗')
       }
-    }, 0);
+    }, 1000);
   })
 }
 
 // #2-1 基礎運用
 
+// promiseSetTimeout(true).then(function(res){
+//   // 成功時會把RESOLVE的值回傳(res為自己取名的因為是response的簡稱所以打家都會以res代稱回傳值)
+//   console.log(res);
+// })
 
 // #2-2 串接
+// 第二次再呼叫就會串接
+
+// promiseSetTimeout(true).then(res=>{
+//   console.log(1,res);
+//   return promiseSetTimeout(true)
+// }).then(res=>console.log(2,res))
 
 
 // #2-3 失敗捕捉
+// 一個完整的promise要有catch
 
+// promiseSetTimeout(false).then(res=>{
+//   console.log(res);
+// }).catch(err=>{
+//   console.error(err);
+// })
 
 // #2-4 元件運用
+// 如何賦予data api的值
+
 // const component = {
 //   data: {},
 //   init() {
-
+//     promiseSetTimeout(true).then(res=>{
+//       // 用箭頭涵式this指向會略過自身fn而取用外面的this
+//       this.data.回傳 = res
+//     })
 //   }
 // }
 
-
+// component.init();
+// console.log(component.data);
 // #3 實戰取得遠端資料
 // #3-1
 // https://github.com/axios/axios
 
 // #3-2 記得捕捉錯誤，Axios 錯誤捕捉技巧
+// api:https://randomuser.me/api/
 // https://randomuser.me/
+axios.get('https://randomuser.me/api/').then(res=>{
+  console.log('回傳',res.data.results);
+}).catch(err=>{
+  console.log(err.response);
+})
 
 </script>
 <!-- 🙇🙇練習結束🙇🙇 -->

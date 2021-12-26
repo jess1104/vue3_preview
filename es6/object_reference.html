@@ -22,7 +22,7 @@
 //   obj: {}
 // }
 // fn(person);
-// // ...
+// // 會從小明改成杰倫
 
 // console.log(person);
 // 關於：這樣的錯誤，ESLint 也有建議不要這麼做（但你是有經驗的開發者時，下方也有提供關閉的方式）
@@ -30,17 +30,35 @@
 
 // #3 解決方案
 // #3-1 淺層拷貝
-// const person = {
-//   name: '小明',
-//   obj: {}
-// }
+const person = {
+  name: '小明',
+  obj: {}
+}
+
+// 方法一
+const p1 = Object.assign({},person);
+console.log(p1);
+
+// 方法二 展開
+const p2 = {...person}
+p2.name = 'jess'
+p2.obj.age =18
+console.log(p2);
+
 
 
 // #3-2 深層拷貝
-// const person = {
-//   name: '小明',
-//   obj: {}
-// }
+const person2 = {
+  name: '小明',
+  obj: {}
+}
+
+const deep1 = JSON.parse(JSON.stringify(person2))
+
+deep1.obj.age = 16;
+
+console.log('person2:',person2);
+console.log('deep1',deep1);
 
 </script>
 <!-- 🙇🙇練習結束🙇🙇 -->
