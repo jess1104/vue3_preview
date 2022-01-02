@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>關注點分離練習</title>
+</head>
+<body>
+
+    <input type="text" id="inputByAdd">
+    <button type="button" id="buttonByAdd">新增</button>
+    <div id="app">
+      <ul></ul>
+    </div>
+  <script>
+    // 資料
+    const data = [
+      {
+        id: 1,
+        content: '我是卡斯伯'
+      },
+      {
+        id: 2,
+        content: '我是小明'
+      }
+    ];
+      const container = document.querySelector('#app ul');
+      const buttonByAdd = document.querySelector('#buttonByAdd');
+      const inputByAdd = document.querySelector('#inputByAdd');
+
+      buttonByAdd.addEventListener('click',function(){
+          const val = inputByAdd.value
+        //   console.log(val);
+        addItem(val);
+      })
+
+      function render() {
+          let template = '';
+          data.forEach(item=>{
+              template += `<li>${item.content}<button type="button" class="delete" data-id="${item.id}">刪除</li>`
+              })
+        container.innerHTML = template
+        const btnsDelete = document.querySelectorAll('.delete')
+        // console.log(btnsDelete);
+        btnsDelete.forEach(item=>{
+            item.addEventListener('click',function(e){
+                // console.dir(e.target);
+                // console.log(+e.target.dataset.id);
+                id = +e.target.dataset.id
+                removeItem(id)
+            })
+        })
+      };
+
+      render();
+    
+    let num = data.length;
+
+    function addItem(content){
+        num++;
+        data.push({
+            id:num,
+            content
+        });
+        render()
+    }
+    // addItem('我是Jess')
+    // console.log(data);
+
+    function removeItem(id){
+        const index = data.findIndex(item=>item.id===id);
+        data.splice(index,1);
+        render();
+    }
+    // removeItem(2);
+    // console.log(data);
+  </script>
+</body>
+</html>
