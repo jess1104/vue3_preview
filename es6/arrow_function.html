@@ -25,30 +25,33 @@ const arr = [1, 2, 3, 4, 5];
 // }
 // person.callName();
 // 當我改用箭頭函式
-const person = {
-  name: '小明',
-  callName: function () { 
-    console.log('1', this.name); // 1 小明
-    // 這邊的非同步函式使用箭頭函式,this會指向他外面的fn
-    setTimeout( ()=> {
-      console.log('2', this.name); // 2 小名
-      console.log('3', this); // 3 person
-    }, 10);
-  },
-}
+// const person = {
+//   name: '小明',
+//   callName: function () { 
+//     console.log('1', this.name); // 1 小明
+//     // 這邊的非同步函式使用箭頭函式,this會指向他外面的fn
+//     setTimeout( ()=> {
+//       console.log('2', this.name); // 2 小明
+//       console.log('3', this); // 3 person
+//     }, 10);
+//   },
+// }
 
-person.callName()
+// person.callName()
 
 // #3 陷阱
 // #3-1
-// var name = '全域'
-// const person = {
-//   name: '小明',
-//   callName: () => { 
-//     console.log(this.name); // 請尋找箭頭所在的作用域為何？
-//   },
-// }
-// person.callName();
+var name = '全域'
+const person = {
+  name: '小明',
+  // callName: () => { 
+  //   console.log(this.name); // 請尋找箭頭所在的作用域為何？
+  // },
+  callName(){
+    console.log(this.name);
+  }
+}
+person.callName();
 
 // #3-2
 // var name = '全域'

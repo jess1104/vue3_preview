@@ -30,9 +30,10 @@
       const inputByAdd = document.querySelector('#inputByAdd');
 
       buttonByAdd.addEventListener('click',function(){
-          const val = inputByAdd.value
+        const val = inputByAdd.value
         //   console.log(val);
         addItem(val);
+        inputByAdd.value =''
       })
 
       function render() {
